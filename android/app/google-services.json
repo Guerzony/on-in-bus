@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "779279121500",
+    "project_id": "on-in-bus",
+    "storage_bucket": "on-in-bus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:779279121500:android:abb418b0de6569a2c43a99",
+        "android_client_info": {
+          "package_name": "com.example.on_in_bus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "779279121500-he7hqbq757jj0h2lvfadkro45m8o3c8o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGh1vCqIN4jaj26cR96858rFXPvbOduCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "779279121500-he7hqbq757jj0h2lvfadkro45m8o3c8o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
