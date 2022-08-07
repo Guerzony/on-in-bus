@@ -43,22 +43,21 @@ class _BusListState extends State<BusList> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const SizedBox(
-                            width: 48,
-                          ),
+                          const SizedBox.square(dimension: 48),
                           Text(
                             'Lista de Ônibus',
                             style: textTheme.titleLarge,
                           ),
-                          if (isAdmin)
-                            SizedBox(
-                              width: 48,
-                              child: IconButton(
-                                splashRadius: 20,
-                                icon: const Icon(Icons.add),
-                                onPressed: () => Navigator.pushNamed(context, '/bus'),
-                              ),
-                            ),
+                          SizedBox(
+                            width: 48,
+                            child: !isAdmin
+                                ? null
+                                : IconButton(
+                                    splashRadius: 20,
+                                    icon: const Icon(Icons.add),
+                                    onPressed: () => Navigator.pushNamed(context, '/bus'),
+                                  ),
+                          ),
                         ],
                       ),
                       if (snapshot.connectionState == ConnectionState.waiting)
