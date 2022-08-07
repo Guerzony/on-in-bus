@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:on_in_bus/data/user.dart';
 import 'package:on_in_bus/utils/auth.dart';
 
 final _auth = FirebaseAuth.instance;
@@ -19,14 +20,18 @@ class _RegisterPageState extends State<RegisterPage> {
   bool showPassword = false;
 
   void register(BuildContext context) async {
-    final username = '${userController.text}@oninus.dev';
+    final username = '${userController.text}@oninbus.dev';
     final password = passwordController.text;
 
     if (!Form.of(context)!.validate()) return;
 
     try {
       setState(() => loading = true);
-      await _auth.createUserWithEmailAndPassword(email: username, password: password);
+      final credential = await _auth.createUserWithEmailAndPassword(email: username, password: password);
+      final id = credential.user?.uid;
+      if (id != null) {
+        await usersRef.doc(id).set(UserData(isAdmin: false));
+      }
     } on FirebaseAuthException catch (exception) {
       final message = getErrorMessage(exception);
       ScaffoldMessenger.of(context).showSnackBar(

@@ -12,8 +12,6 @@ class UserDialog extends StatefulWidget {
 }
 
 class _UserDialogState extends State<UserDialog> {
-  
-
   void logout() async {
     await _auth.signOut();
   }
