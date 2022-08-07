@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:on_in_bus/data/bus.dart';
+import 'package:on_in_bus/utils/currency.dart';
 import 'package:on_in_bus/utils/geopoint_latlng.dart';
 import 'package:on_in_bus/utils/location_latlng.dart';
 import 'package:on_in_bus/widgets/bus_list.dart';
@@ -73,6 +74,8 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
     final media = MediaQuery.of(context);
 
     return WillPopScope(
@@ -83,18 +86,29 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
           final Map<String, Bus> buses = {
             for (final bus in (snapshot.data?.docs ?? [])) bus.id: bus.data,
           };
-    
+
           final selectedBus = buses[selectedId];
-    
+
           if (selectedId != null && selectedBus == null && snapshot.hasData) {
             selectedId = null;
           }
-    
+
           return FutureBuilder<BitmapDescriptor>(
             future: BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, 'assets/images/bus.png'),
             builder: (context, busMarker) => Scaffold(
               appBar: AppBar(
-                title: Text(selectedBus != null ? selectedBus.name : 'ON IN BUS'),
+                title: selectedBus == null
+                    ? const Text('ON IN BUS')
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(selectedBus.name),
+                          Text(
+                            currencyFormatter.format(selectedBus.price.toStringAsFixed(2)),
+                            style: textTheme.titleSmall!.copyWith(color: Colors.white),
+                          ),
+                        ],
+                      ),
                 backgroundColor: selectedBus != null ? Colors.black : null,
                 foregroundColor: selectedBus != null ? Colors.white : null,
                 automaticallyImplyLeading: false,

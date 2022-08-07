@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:on_in_bus/data/bus.dart';
 import 'package:on_in_bus/data/bus_arguments.dart';
 import 'package:on_in_bus/data/constants.dart';
 import 'package:on_in_bus/utils/color.dart';
+import 'package:on_in_bus/utils/currency.dart';
 import 'package:on_in_bus/utils/geopoint_latlng.dart';
 import 'package:on_in_bus/utils/location.dart';
 import 'package:on_in_bus/widgets/color_dialog.dart';
@@ -22,7 +22,6 @@ class BusDialog extends StatefulWidget {
 class _BusDialogState extends State<BusDialog> with AfterLayoutMixin<BusDialog> {
   final titleController = TextEditingController();
   final priceController = TextEditingController();
-  final currencyFormatter = CurrencyTextInputFormatter(locale: 'pt', symbol: 'R\$ ');
   final points = <LatLng>[];
   LatLng? location;
   Color color = Colors.cyanAccent.shade700;
