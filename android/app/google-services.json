@@ -29,6 +29,13 @@
             {
               "client_id": "779279121500-he7hqbq757jj0h2lvfadkro45m8o3c8o.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "779279121500-i28c0dh5vgo11uv3glgl19j275strq2h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.onInBus"
+              }
             }
           ]
         }
