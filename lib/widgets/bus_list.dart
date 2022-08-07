@@ -8,7 +8,7 @@ class BusList extends StatefulWidget {
     required this.onSelect,
   }) : super(key: key);
 
-  final void Function(String id) onSelect;
+  final void Function(MapEntry<String, Bus>) onSelect;
 
   @override
   State<BusList> createState() => _BusListState();
@@ -25,7 +25,7 @@ class _BusListState extends State<BusList> {
     return StreamBuilder<BusQuerySnapshot>(
         stream: busStream,
         builder: (context, snapshot) {
-          final data = {
+          final Map<String, Bus> data = {
             for (final bus in snapshot.data?.docs ?? []) bus.id: bus.data,
           };
 
@@ -86,7 +86,7 @@ class _BusListState extends State<BusList> {
                         return ListTile(
                           title: Text(bus.name),
                           onTap: () => setState(() {
-                            widget.onSelect(id);
+                            widget.onSelect(data.entries.elementAt(index));
                             Navigator.pop(context);
                           }),
                           trailing: IconButton(

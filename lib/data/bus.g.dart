@@ -123,6 +123,8 @@ abstract class BusDocumentReference
   Future<void> update({
     String name,
     double price,
+    GeoPoint? location,
+    String color,
   });
 
   Future<void> set(Bus value);
@@ -169,10 +171,14 @@ class _$BusDocumentReference
   Future<void> update({
     Object? name = _sentinel,
     Object? price = _sentinel,
+    Object? location = _sentinel,
+    Object? color = _sentinel,
   }) async {
     final json = {
       if (name != _sentinel) "name": name as String,
       if (price != _sentinel) "price": price as double,
+      if (location != _sentinel) "location": location as GeoPoint?,
+      if (color != _sentinel) "color": color as String,
     };
 
     return reference.update(json);
@@ -319,6 +325,28 @@ abstract class BusQuery implements QueryReference<Bus, BusQuerySnapshot> {
     List<double>? whereIn,
     List<double>? whereNotIn,
   });
+  BusQuery whereLocation({
+    GeoPoint? isEqualTo,
+    GeoPoint? isNotEqualTo,
+    GeoPoint? isLessThan,
+    GeoPoint? isLessThanOrEqualTo,
+    GeoPoint? isGreaterThan,
+    GeoPoint? isGreaterThanOrEqualTo,
+    bool? isNull,
+    List<GeoPoint?>? whereIn,
+    List<GeoPoint?>? whereNotIn,
+  });
+  BusQuery whereColor({
+    String? isEqualTo,
+    String? isNotEqualTo,
+    String? isLessThan,
+    String? isLessThanOrEqualTo,
+    String? isGreaterThan,
+    String? isGreaterThanOrEqualTo,
+    bool? isNull,
+    List<String>? whereIn,
+    List<String>? whereNotIn,
+  });
 
   BusQuery orderByDocumentId({
     bool descending = false,
@@ -350,6 +378,30 @@ abstract class BusQuery implements QueryReference<Bus, BusQuerySnapshot> {
     double startAfter,
     double endAt,
     double endBefore,
+    BusDocumentSnapshot? startAtDocument,
+    BusDocumentSnapshot? endAtDocument,
+    BusDocumentSnapshot? endBeforeDocument,
+    BusDocumentSnapshot? startAfterDocument,
+  });
+
+  BusQuery orderByLocation({
+    bool descending = false,
+    GeoPoint? startAt,
+    GeoPoint? startAfter,
+    GeoPoint? endAt,
+    GeoPoint? endBefore,
+    BusDocumentSnapshot? startAtDocument,
+    BusDocumentSnapshot? endAtDocument,
+    BusDocumentSnapshot? endBeforeDocument,
+    BusDocumentSnapshot? startAfterDocument,
+  });
+
+  BusQuery orderByColor({
+    bool descending = false,
+    String startAt,
+    String startAfter,
+    String endAt,
+    String endBefore,
     BusDocumentSnapshot? startAtDocument,
     BusDocumentSnapshot? endAtDocument,
     BusDocumentSnapshot? endBeforeDocument,
@@ -578,6 +630,62 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     );
   }
 
+  BusQuery whereLocation({
+    GeoPoint? isEqualTo,
+    GeoPoint? isNotEqualTo,
+    GeoPoint? isLessThan,
+    GeoPoint? isLessThanOrEqualTo,
+    GeoPoint? isGreaterThan,
+    GeoPoint? isGreaterThanOrEqualTo,
+    bool? isNull,
+    List<GeoPoint?>? whereIn,
+    List<GeoPoint?>? whereNotIn,
+  }) {
+    return _$BusQuery(
+      reference.where(
+        _$BusFieldMap["location"]!,
+        isEqualTo: isEqualTo,
+        isNotEqualTo: isNotEqualTo,
+        isLessThan: isLessThan,
+        isLessThanOrEqualTo: isLessThanOrEqualTo,
+        isGreaterThan: isGreaterThan,
+        isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
+        isNull: isNull,
+        whereIn: whereIn,
+        whereNotIn: whereNotIn,
+      ),
+      _collection,
+    );
+  }
+
+  BusQuery whereColor({
+    String? isEqualTo,
+    String? isNotEqualTo,
+    String? isLessThan,
+    String? isLessThanOrEqualTo,
+    String? isGreaterThan,
+    String? isGreaterThanOrEqualTo,
+    bool? isNull,
+    List<String>? whereIn,
+    List<String>? whereNotIn,
+  }) {
+    return _$BusQuery(
+      reference.where(
+        _$BusFieldMap["color"]!,
+        isEqualTo: isEqualTo,
+        isNotEqualTo: isNotEqualTo,
+        isLessThan: isLessThan,
+        isLessThanOrEqualTo: isLessThanOrEqualTo,
+        isGreaterThan: isGreaterThan,
+        isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
+        isNull: isNull,
+        whereIn: whereIn,
+        whereNotIn: whereNotIn,
+      ),
+      _collection,
+    );
+  }
+
   BusQuery orderByDocumentId({
     bool descending = false,
     Object? startAt = _sentinel,
@@ -706,6 +814,92 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     return _$BusQuery(query, _collection);
   }
 
+  BusQuery orderByLocation({
+    bool descending = false,
+    Object? startAt = _sentinel,
+    Object? startAfter = _sentinel,
+    Object? endAt = _sentinel,
+    Object? endBefore = _sentinel,
+    BusDocumentSnapshot? startAtDocument,
+    BusDocumentSnapshot? endAtDocument,
+    BusDocumentSnapshot? endBeforeDocument,
+    BusDocumentSnapshot? startAfterDocument,
+  }) {
+    var query =
+        reference.orderBy(_$BusFieldMap["location"]!, descending: descending);
+
+    if (startAtDocument != null) {
+      query = query.startAtDocument(startAtDocument.snapshot);
+    }
+    if (startAfterDocument != null) {
+      query = query.startAfterDocument(startAfterDocument.snapshot);
+    }
+    if (endAtDocument != null) {
+      query = query.endAtDocument(endAtDocument.snapshot);
+    }
+    if (endBeforeDocument != null) {
+      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+    }
+
+    if (startAt != _sentinel) {
+      query = query.startAt([startAt]);
+    }
+    if (startAfter != _sentinel) {
+      query = query.startAfter([startAfter]);
+    }
+    if (endAt != _sentinel) {
+      query = query.endAt([endAt]);
+    }
+    if (endBefore != _sentinel) {
+      query = query.endBefore([endBefore]);
+    }
+
+    return _$BusQuery(query, _collection);
+  }
+
+  BusQuery orderByColor({
+    bool descending = false,
+    Object? startAt = _sentinel,
+    Object? startAfter = _sentinel,
+    Object? endAt = _sentinel,
+    Object? endBefore = _sentinel,
+    BusDocumentSnapshot? startAtDocument,
+    BusDocumentSnapshot? endAtDocument,
+    BusDocumentSnapshot? endBeforeDocument,
+    BusDocumentSnapshot? startAfterDocument,
+  }) {
+    var query =
+        reference.orderBy(_$BusFieldMap["color"]!, descending: descending);
+
+    if (startAtDocument != null) {
+      query = query.startAtDocument(startAtDocument.snapshot);
+    }
+    if (startAfterDocument != null) {
+      query = query.startAfterDocument(startAfterDocument.snapshot);
+    }
+    if (endAtDocument != null) {
+      query = query.endAtDocument(endAtDocument.snapshot);
+    }
+    if (endBeforeDocument != null) {
+      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+    }
+
+    if (startAt != _sentinel) {
+      query = query.startAt([startAt]);
+    }
+    if (startAfter != _sentinel) {
+      query = query.startAfter([startAfter]);
+    }
+    if (endAt != _sentinel) {
+      query = query.endAt([endAt]);
+    }
+    if (endBefore != _sentinel) {
+      query = query.endBefore([endBefore]);
+    }
+
+    return _$BusQuery(query, _collection);
+  }
+
   @override
   bool operator ==(Object other) {
     return other is _$BusQuery &&
@@ -757,16 +951,22 @@ class BusQueryDocumentSnapshot extends FirestoreQueryDocumentSnapshot<Bus>
 Bus _$BusFromJson(Map<String, dynamic> json) => Bus(
       name: json['name'] as String,
       price: (json['price'] as num).toDouble(),
-      points: (json['points'] as List<dynamic>)
-          .map(
-              (e) => const FirestoreGeoPointConverter().fromJson(e as GeoPoint))
-          .toList(),
+      points: (json['points'] as List<dynamic>?)
+              ?.map((e) =>
+                  const FirestoreGeoPointConverter().fromJson(e as GeoPoint))
+              .toList() ??
+          const [],
+      location: _$JsonConverterFromJson<GeoPoint, GeoPoint>(
+          json['location'], const FirestoreGeoPointConverter().fromJson),
+      color: json['color'] as String? ?? '#00b8d4',
     );
 
 const _$BusFieldMap = <String, String>{
   'name': 'name',
   'price': 'price',
   'points': 'points',
+  'location': 'location',
+  'color': 'color',
 };
 
 Map<String, dynamic> _$BusToJson(Bus instance) => <String, dynamic>{
@@ -775,4 +975,19 @@ Map<String, dynamic> _$BusToJson(Bus instance) => <String, dynamic>{
       'points': instance.points
           .map(const FirestoreGeoPointConverter().toJson)
           .toList(),
+      'location': _$JsonConverterToJson<GeoPoint, GeoPoint>(
+          instance.location, const FirestoreGeoPointConverter().toJson),
+      'color': instance.color,
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) =>
+    value == null ? null : toJson(value);
