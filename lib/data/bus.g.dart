@@ -123,6 +123,7 @@ abstract class BusDocumentReference
   Future<void> update({
     String name,
     double price,
+    int seats,
     GeoPoint? location,
     String color,
   });
@@ -171,12 +172,14 @@ class _$BusDocumentReference
   Future<void> update({
     Object? name = _sentinel,
     Object? price = _sentinel,
+    Object? seats = _sentinel,
     Object? location = _sentinel,
     Object? color = _sentinel,
   }) async {
     final json = {
       if (name != _sentinel) "name": name as String,
       if (price != _sentinel) "price": price as double,
+      if (seats != _sentinel) "seats": seats as int,
       if (location != _sentinel) "location": location as GeoPoint?,
       if (color != _sentinel) "color": color as String,
     };
@@ -325,6 +328,17 @@ abstract class BusQuery implements QueryReference<Bus, BusQuerySnapshot> {
     List<double>? whereIn,
     List<double>? whereNotIn,
   });
+  BusQuery whereSeats({
+    int? isEqualTo,
+    int? isNotEqualTo,
+    int? isLessThan,
+    int? isLessThanOrEqualTo,
+    int? isGreaterThan,
+    int? isGreaterThanOrEqualTo,
+    bool? isNull,
+    List<int>? whereIn,
+    List<int>? whereNotIn,
+  });
   BusQuery whereLocation({
     GeoPoint? isEqualTo,
     GeoPoint? isNotEqualTo,
@@ -378,6 +392,18 @@ abstract class BusQuery implements QueryReference<Bus, BusQuerySnapshot> {
     double startAfter,
     double endAt,
     double endBefore,
+    BusDocumentSnapshot? startAtDocument,
+    BusDocumentSnapshot? endAtDocument,
+    BusDocumentSnapshot? endBeforeDocument,
+    BusDocumentSnapshot? startAfterDocument,
+  });
+
+  BusQuery orderBySeats({
+    bool descending = false,
+    int startAt,
+    int startAfter,
+    int endAt,
+    int endBefore,
     BusDocumentSnapshot? startAtDocument,
     BusDocumentSnapshot? endAtDocument,
     BusDocumentSnapshot? endBeforeDocument,
@@ -630,6 +656,34 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     );
   }
 
+  BusQuery whereSeats({
+    int? isEqualTo,
+    int? isNotEqualTo,
+    int? isLessThan,
+    int? isLessThanOrEqualTo,
+    int? isGreaterThan,
+    int? isGreaterThanOrEqualTo,
+    bool? isNull,
+    List<int>? whereIn,
+    List<int>? whereNotIn,
+  }) {
+    return _$BusQuery(
+      reference.where(
+        _$BusFieldMap["seats"]!,
+        isEqualTo: isEqualTo,
+        isNotEqualTo: isNotEqualTo,
+        isLessThan: isLessThan,
+        isLessThanOrEqualTo: isLessThanOrEqualTo,
+        isGreaterThan: isGreaterThan,
+        isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
+        isNull: isNull,
+        whereIn: whereIn,
+        whereNotIn: whereNotIn,
+      ),
+      _collection,
+    );
+  }
+
   BusQuery whereLocation({
     GeoPoint? isEqualTo,
     GeoPoint? isNotEqualTo,
@@ -814,6 +868,49 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     return _$BusQuery(query, _collection);
   }
 
+  BusQuery orderBySeats({
+    bool descending = false,
+    Object? startAt = _sentinel,
+    Object? startAfter = _sentinel,
+    Object? endAt = _sentinel,
+    Object? endBefore = _sentinel,
+    BusDocumentSnapshot? startAtDocument,
+    BusDocumentSnapshot? endAtDocument,
+    BusDocumentSnapshot? endBeforeDocument,
+    BusDocumentSnapshot? startAfterDocument,
+  }) {
+    var query =
+        reference.orderBy(_$BusFieldMap["seats"]!, descending: descending);
+
+    if (startAtDocument != null) {
+      query = query.startAtDocument(startAtDocument.snapshot);
+    }
+    if (startAfterDocument != null) {
+      query = query.startAfterDocument(startAfterDocument.snapshot);
+    }
+    if (endAtDocument != null) {
+      query = query.endAtDocument(endAtDocument.snapshot);
+    }
+    if (endBeforeDocument != null) {
+      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+    }
+
+    if (startAt != _sentinel) {
+      query = query.startAt([startAt]);
+    }
+    if (startAfter != _sentinel) {
+      query = query.startAfter([startAfter]);
+    }
+    if (endAt != _sentinel) {
+      query = query.endAt([endAt]);
+    }
+    if (endBefore != _sentinel) {
+      query = query.endBefore([endBefore]);
+    }
+
+    return _$BusQuery(query, _collection);
+  }
+
   BusQuery orderByLocation({
     bool descending = false,
     Object? startAt = _sentinel,
@@ -951,6 +1048,7 @@ class BusQueryDocumentSnapshot extends FirestoreQueryDocumentSnapshot<Bus>
 Bus _$BusFromJson(Map<String, dynamic> json) => Bus(
       name: json['name'] as String,
       price: (json['price'] as num).toDouble(),
+      seats: json['seats'] as int? ?? 0,
       points: (json['points'] as List<dynamic>?)
               ?.map((e) =>
                   const FirestoreGeoPointConverter().fromJson(e as GeoPoint))
@@ -964,6 +1062,7 @@ Bus _$BusFromJson(Map<String, dynamic> json) => Bus(
 const _$BusFieldMap = <String, String>{
   'name': 'name',
   'price': 'price',
+  'seats': 'seats',
   'points': 'points',
   'location': 'location',
   'color': 'color',
@@ -972,6 +1071,7 @@ const _$BusFieldMap = <String, String>{
 Map<String, dynamic> _$BusToJson(Bus instance) => <String, dynamic>{
       'name': instance.name,
       'price': instance.price,
+      'seats': instance.seats,
       'points': instance.points
           .map(const FirestoreGeoPointConverter().toJson)
           .toList(),

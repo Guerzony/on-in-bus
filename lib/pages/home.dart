@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:on_in_bus/data/bus.dart';
+import 'package:on_in_bus/data/bus_arguments.dart';
 import 'package:on_in_bus/utils/currency.dart';
 import 'package:on_in_bus/utils/geopoint_latlng.dart';
 import 'package:on_in_bus/utils/location_latlng.dart';
 import 'package:on_in_bus/widgets/bus_list.dart';
+import 'package:on_in_bus/widgets/info_dialog.dart';
 import 'package:on_in_bus/widgets/user_dialog.dart';
 
 final _auth = FirebaseAuth.instance;
@@ -97,18 +99,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
             future: BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, 'assets/images/bus.png'),
             builder: (context, busMarker) => Scaffold(
               appBar: AppBar(
-                title: selectedBus == null
-                    ? const Text('ON IN BUS')
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(selectedBus.name),
-                          Text(
-                            currencyFormatter.format(selectedBus.price.toStringAsFixed(2)),
-                            style: textTheme.titleSmall!.copyWith(color: Colors.white),
-                          ),
-                        ],
-                      ),
+                title: Text(selectedBus == null ? 'ON IN BUS' : selectedBus.name),
                 backgroundColor: selectedBus != null ? Colors.black : null,
                 foregroundColor: selectedBus != null ? Colors.white : null,
                 automaticallyImplyLeading: false,
@@ -131,6 +122,14 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
                       )
                     : null,
                 actions: [
+                  if (selectedId != null)
+                    IconButton(
+                      icon: const Icon(Icons.info_outline),
+                      onPressed: () => showDialog(
+                        context: context,
+                        builder: (context) => InfoDialog(id: selectedId!),
+                      ),
+                    ),
                   IconButton(
                     icon: const Icon(Icons.person),
                     onPressed: () => showDialog(

@@ -11,6 +11,7 @@ class Bus {
   Bus({
     required this.name,
     required this.price,
+    this.seats = 0,
     this.points = const [],
     this.location,
     this.color = '#00b8d4',
@@ -18,6 +19,7 @@ class Bus {
 
   final String name;
   final double price;
+  final int seats;
   final List<GeoPoint> points;
   final GeoPoint? location;
   final String color;

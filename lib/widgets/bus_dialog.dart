@@ -22,6 +22,7 @@ class BusDialog extends StatefulWidget {
 class _BusDialogState extends State<BusDialog> with AfterLayoutMixin<BusDialog> {
   final titleController = TextEditingController();
   final priceController = TextEditingController();
+  final seatsController = TextEditingController();
   final points = <LatLng>[];
   LatLng? location;
   Color color = Colors.cyanAccent.shade700;
@@ -43,6 +44,7 @@ class _BusDialogState extends State<BusDialog> with AfterLayoutMixin<BusDialog> 
       id = args.id;
       titleController.text = args.bus?.name ?? '';
       priceController.text = currencyFormatter.format(args.bus?.price.toStringAsFixed(2) ?? '0');
+      seatsController.text = args.bus?.seats.toString() ?? '0';
       location = args.bus?.location?.latlng;
       color = args.bus?.colorValue ?? color;
 
@@ -82,6 +84,7 @@ class _BusDialogState extends State<BusDialog> with AfterLayoutMixin<BusDialog> 
           Bus(
             name: titleController.text,
             price: currencyFormatter.getUnformattedValue().toDouble(),
+            seats: int.tryParse(seatsController.text) ?? 0,
             points: points.map((point) => point.geoPoint).toList(growable: false),
             color: color.toHex(leadingHashSign: true),
             location: location?.geoPoint,
@@ -186,7 +189,20 @@ class _BusDialogState extends State<BusDialog> with AfterLayoutMixin<BusDialog> 
                                   border: OutlineInputBorder(),
                                   hintText: '',
                                 ),
-                                validator: (value) => value?.isNotEmpty == true ? null : 'Preço é obrigatório',
+                                validator: (value) => value?.isNotEmpty == true ? null : 'Campo obrigatório',
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: TextFormField(
+                                controller: seatsController,
+                                keyboardType: TextInputType.number,
+                                decoration: const InputDecoration(
+                                  label: Text('Assentos'),
+                                  border: OutlineInputBorder(),
+                                  hintText: '',
+                                ),
+                                validator: (value) => value?.isNotEmpty == true ? null : 'Campo obrigatório',
                               ),
                             ),
                             Padding(
