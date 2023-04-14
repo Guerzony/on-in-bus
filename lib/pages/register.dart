@@ -20,7 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
   bool showPassword = false;
 
   void register(BuildContext context) async {
-    final username = '${userController.text}@oninbus.dev';
+    final username = '${userController.text}@buser.dev';
     final password = passwordController.text;
 
     if (!Form.of(context)!.validate()) return;

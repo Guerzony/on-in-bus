@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   void login(BuildContext context) async {
     try {
       setState(() => loading = true);
-      final username = '${usernameController.text}@oninbus.dev';
+      final username = '${usernameController.text}@buser.dev';
       final password = passwordController.text;
 
       await _auth.signInWithEmailAndPassword(email: username, password: password);
@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                 Expanded(
                   child: Center(
                     child: Text(
-                      'On In Bus',
+                      'B-user',
                       style: textTheme.headlineLarge,
                       textAlign: TextAlign.center,
                     ),

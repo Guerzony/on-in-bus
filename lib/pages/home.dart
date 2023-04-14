@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
             future: BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, 'assets/images/bus.png'),
             builder: (context, busMarker) => Scaffold(
               appBar: AppBar(
-                title: Text(selectedBus == null ? 'ON IN BUS' : selectedBus.name),
+                title: Text(selectedBus == null ? 'B - USER' : selectedBus.name),
                 backgroundColor: selectedBus != null ? Colors.black : null,
                 foregroundColor: selectedBus != null ? Colors.white : null,
                 automaticallyImplyLeading: false,

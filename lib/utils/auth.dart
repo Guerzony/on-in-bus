@@ -8,5 +8,5 @@ String getErrorMessage(FirebaseAuthException exception) {
         'email-already-in-use': 'Nome de usuário já existe',
         'too-many-requests': 'Muitas tentativas de login, tente novamente mais tarde',
       }[exception.code] ??
-      'Erro desconhecido';
+      exception.code;
 }
