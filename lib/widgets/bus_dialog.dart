@@ -78,7 +78,7 @@ class _BusDialogState extends State<BusDialog> with AfterLayoutMixin<BusDialog> 
   }
 
   void save(BuildContext context) async {
-    if (!Form.of(context)!.validate()) return;
+    if (!Form.of(context).validate()) return;
 
     await busesRef.doc(id).set(
           Bus(

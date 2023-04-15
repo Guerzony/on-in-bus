@@ -8,22 +8,25 @@ environment:
 
 dependencies:
   after_layout: ^1.2.0
-  cloud_firestore: ^3.4.3
+  cloud_firestore: ^4.5.1
   cloud_firestore_odm: ^1.0.0-dev.25
   currency_text_input_formatter: ^2.1.7
-  firebase_auth: ^3.6.2
-  firebase_core: ^1.20.0
+  firebase_auth: ^4.2.2
+  firebase_core: ^2.9.0
   flutter:
     sdk: flutter
   flutter_material_color_picker: ^1.1.0+2
   geolocator: ^9.0.1
   google_maps_flutter: ^2.1.10
+  google_maps_flutter_android: ^2.4.10
+  google_maps_flutter_platform_interface: ^2.2.6
+  hawk_fab_menu: ^1.2.0
   json_annotation: ^4.6.0
   location: ^4.4.0
   permission_handler: ^10.0.0
 
 dev_dependencies:
-  build_runner: ^2.2.0
+  build_runner: ^2.3.3
   cloud_firestore_odm_generator: ^1.0.0-dev.25
   flutter_lints: ^2.0.0
   json_serializable: ^6.3.1

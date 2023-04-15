@@ -4,14 +4,15 @@ import 'package:after_layout/after_layout.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hawk_fab_menu/hawk_fab_menu.dart';
 import 'package:location/location.dart';
 import 'package:on_in_bus/data/bus.dart';
-import 'package:on_in_bus/data/bus_arguments.dart';
-import 'package:on_in_bus/utils/currency.dart';
+import 'package:on_in_bus/data/stop.dart';
 import 'package:on_in_bus/utils/geopoint_latlng.dart';
 import 'package:on_in_bus/utils/location_latlng.dart';
 import 'package:on_in_bus/widgets/bus_list.dart';
 import 'package:on_in_bus/widgets/info_dialog.dart';
+import 'package:on_in_bus/widgets/stop_list.dart';
 import 'package:on_in_bus/widgets/user_dialog.dart';
 
 final _auth = FirebaseAuth.instance;
@@ -36,6 +37,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
   String? selectedId;
 
   final busStream = busesRef.snapshots();
+  final stopStream = stopsRef.snapshots();
 
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) async {
@@ -76,121 +78,181 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
     final media = MediaQuery.of(context);
 
     return WillPopScope(
       onWillPop: () async => false,
-      child: StreamBuilder<BusQuerySnapshot>(
-        stream: busStream,
-        builder: (context, snapshot) {
-          final Map<String, Bus> buses = {
-            for (final bus in (snapshot.data?.docs ?? [])) bus.id: bus.data,
-          };
+      child: StreamBuilder<StopQuerySnapshot>(
+          stream: stopStream,
+          builder: (context, snapshot) {
+            final Map<String, Stop> stops = {
+              for (final stop in (snapshot.data?.docs ?? []))
+                stop.id: stop.data,
+            };
 
-          final selectedBus = buses[selectedId];
+            return StreamBuilder<BusQuerySnapshot>(
+              stream: busStream,
+              builder: (context, snapshot) {
+                final Map<String, Bus> buses = {
+                  for (final bus in (snapshot.data?.docs ?? []))
+                    bus.id: bus.data,
+                };
 
-          if (selectedId != null && selectedBus == null && snapshot.hasData) {
-            selectedId = null;
-          }
+                final selectedBus = buses[selectedId];
 
-          return FutureBuilder<BitmapDescriptor>(
-            future: BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, 'assets/images/bus.png'),
-            builder: (context, busMarker) => Scaffold(
-              appBar: AppBar(
-                title: Text(selectedBus == null ? 'B - USER' : selectedBus.name),
-                backgroundColor: selectedBus != null ? Colors.black : null,
-                foregroundColor: selectedBus != null ? Colors.white : null,
-                automaticallyImplyLeading: false,
-                flexibleSpace: PreferredSize(
-                  preferredSize: const Size(0, kToolbarHeight),
-                  child: SafeArea(
-                    child: SizedBox(
-                      height: kToolbarHeight,
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: snapshot.hasData ? const SizedBox.shrink() : const LinearProgressIndicator(),
-                      ),
+                if (selectedId != null &&
+                    selectedBus == null &&
+                    snapshot.hasData) {
+                  selectedId = null;
+                }
+
+                return FutureBuilder<BitmapDescriptor>(
+                    future: BitmapDescriptor.fromAssetImage(
+                      ImageConfiguration.empty,
+                      'assets/images/signpost.png',
                     ),
-                  ),
-                ),
-                leading: selectedBus != null
-                    ? IconButton(
-                        icon: const Icon(Icons.close),
-                        onPressed: () => setState(() => selectedId = null),
-                      )
-                    : null,
-                actions: [
-                  if (selectedId != null)
-                    IconButton(
-                      icon: const Icon(Icons.info_outline),
-                      onPressed: () => showDialog(
-                        context: context,
-                        builder: (context) => InfoDialog(id: selectedId!),
-                      ),
-                    ),
-                  IconButton(
-                    icon: const Icon(Icons.person),
-                    onPressed: () => showDialog(
-                      context: context,
-                      builder: (context) => const UserDialog(),
-                    ),
-                  ),
-                ],
-              ),
-              body: GoogleMap(
-                initialCameraPosition: initialPosition,
-                onMapCreated: (controller) => _controller.complete(controller),
-                myLocationEnabled: true,
-                myLocationButtonEnabled: true,
-                polylines: {
-                  for (final bus in buses.entries)
-                    if (selectedId == null || selectedId == bus.key)
-                      Polyline(
-                        polylineId: PolylineId('line-${bus.key}'),
-                        width: 4,
-                        color: bus.value.colorValue,
-                        points: [
-                          ...bus.value.points.map((point) => point.latlng),
-                          if (bus.value.points.length > 2) bus.value.points.first.latlng,
-                        ],
-                      ),
-                },
-                markers: {
-                  for (final bus in buses.entries)
-                    if ((selectedId == null || selectedId == bus.key) && bus.value.location != null)
-                      Marker(
-                        markerId: MarkerId('location-${bus.key}'),
-                        position: bus.value.location!.latlng,
-                        icon: busMarker.data!,
-                        anchor: const Offset(0.5, 0.5),
-                        onTap: () => selectBus(bus),
-                        consumeTapEvents: true,
-                      ),
-                },
-              ),
-              floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-              floatingActionButton: !snapshot.hasData
-                  ? null
-                  : Builder(
-                      builder: (context) => FloatingActionButton(
-                        child: const Icon(Icons.directions_bus),
-                        onPressed: () => showModalBottomSheet(
-                          context: context,
-                          builder: (context) => SizedBox(
-                            height: media.size.height * 0.5,
-                            child: BusList(
-                              onSelect: selectBus,
+                    builder: (context, stopMarker) {
+                      return FutureBuilder<BitmapDescriptor>(
+                        future: BitmapDescriptor.fromAssetImage(
+                          ImageConfiguration.empty,
+                          'assets/images/bus.png',
+                        ),
+                        builder: (context, busMarker) => Scaffold(
+                          appBar: AppBar(
+                            title: Text(selectedBus == null
+                                ? 'B - USER'
+                                : selectedBus.name),
+                            backgroundColor:
+                                selectedBus != null ? Colors.black : null,
+                            foregroundColor:
+                                selectedBus != null ? Colors.white : null,
+                            automaticallyImplyLeading: false,
+                            flexibleSpace: PreferredSize(
+                              preferredSize: const Size(0, kToolbarHeight),
+                              child: SafeArea(
+                                child: SizedBox(
+                                  height: kToolbarHeight,
+                                  child: Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: snapshot.hasData
+                                        ? const SizedBox.shrink()
+                                        : const LinearProgressIndicator(),
+                                  ),
+                                ),
+                              ),
                             ),
+                            leading: selectedBus != null
+                                ? IconButton(
+                                    icon: const Icon(Icons.close),
+                                    onPressed: () =>
+                                        setState(() => selectedId = null),
+                                  )
+                                : null,
+                            actions: [
+                              if (selectedId != null)
+                                IconButton(
+                                  icon: const Icon(Icons.info_outline),
+                                  onPressed: () => showDialog(
+                                    context: context,
+                                    builder: (context) =>
+                                        InfoDialog(id: selectedId!),
+                                  ),
+                                ),
+                              IconButton(
+                                icon: const Icon(Icons.person),
+                                onPressed: () => showDialog(
+                                  context: context,
+                                  builder: (context) => const UserDialog(),
+                                ),
+                              ),
+                            ],
+                          ),
+                          body: HawkFabMenu(
+                            body: GoogleMap(
+                              zoomControlsEnabled: false,
+                              initialCameraPosition: initialPosition,
+                              onMapCreated: (controller) =>
+                                  _controller.complete(controller),
+                              myLocationEnabled: true,
+                              myLocationButtonEnabled: true,
+                              polylines: {
+                                for (final bus in buses.entries)
+                                  if (selectedId == null ||
+                                      selectedId == bus.key)
+                                    Polyline(
+                                      polylineId: PolylineId('line-${bus.key}'),
+                                      width: 4,
+                                      color: bus.value.colorValue,
+                                      points: [
+                                        ...bus.value.points
+                                            .map((point) => point.latlng),
+                                        if (bus.value.points.length > 2)
+                                          bus.value.points.first.latlng,
+                                      ],
+                                    ),
+                              },
+                              markers: {
+                                for (final bus in buses.entries)
+                                  if ((selectedId == null ||
+                                          selectedId == bus.key) &&
+                                      bus.value.location != null)
+                                    Marker(
+                                      markerId: MarkerId('location-${bus.key}'),
+                                      position: bus.value.location!.latlng,
+                                      icon: busMarker.data!,
+                                      anchor: const Offset(0.5, 0.5),
+                                      onTap: () => selectBus(bus),
+                                      consumeTapEvents: true,
+                                    ),
+                                for (final stop in stops.entries)
+                                  if ((selectedId == null ||
+                                          selectedId == stop.key) &&
+                                      stop.value.location != null)
+                                    Marker(
+                                      markerId:
+                                          MarkerId('location-${stop.key}'),
+                                      position: stop.value.location!.latlng,
+                                      icon: stopMarker.data!,
+                                      anchor: const Offset(0.5, 1.0),
+                                      consumeTapEvents: true,
+                                    ),
+                              },
+                            ),
+                            items: [
+                              HawkFabMenuItem(
+                                icon: const Icon(Icons.directions_bus),
+                                label: 'Lista de Ônibus',
+                                ontap: () => showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) => SizedBox(
+                                    height: media.size.height * 0.5,
+                                    child: BusList(
+                                      onSelect: selectBus,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              HawkFabMenuItem(
+                                icon: const Icon(Icons.signpost_outlined),
+                                label: 'Lista de Paradas',
+                                ontap: () => showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) => SizedBox(
+                                    height: media.size.height * 0.5,
+                                    child: StopList(
+                                      onSelect: (_) {},
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                         ),
-                      ),
-                    ),
-            ),
-          );
-        },
-      ),
+                      );
+                    });
+              },
+            );
+          }),
     );
   }
 }

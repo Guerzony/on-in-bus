@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user.dart';
+part of 'stop.dart';
 
 // **************************************************************************
 // CollectionGenerator
@@ -18,81 +18,81 @@ const _sentinel = _Sentinel();
 /// A collection reference object can be used for adding documents,
 /// getting document references, and querying for documents
 /// (using the methods inherited from Query).
-abstract class UserDataCollectionReference
+abstract class StopCollectionReference
     implements
-        UserDataQuery,
-        FirestoreCollectionReference<UserData, UserDataQuerySnapshot> {
-  factory UserDataCollectionReference([
+        StopQuery,
+        FirestoreCollectionReference<Stop, StopQuerySnapshot> {
+  factory StopCollectionReference([
     FirebaseFirestore? firestore,
-  ]) = _$UserDataCollectionReference;
+  ]) = _$StopCollectionReference;
 
-  static UserData fromFirestore(
+  static Stop fromFirestore(
     DocumentSnapshot<Map<String, Object?>> snapshot,
     SnapshotOptions? options,
   ) {
-    return _$UserDataFromJson(snapshot.data()!);
+    return Stop.fromJson(snapshot.data()!);
   }
 
   static Map<String, Object?> toFirestore(
-    UserData value,
+    Stop value,
     SetOptions? options,
   ) {
     return value.toJson();
   }
 
   @override
-  CollectionReference<UserData> get reference;
+  CollectionReference<Stop> get reference;
 
   @override
-  UserDataDocumentReference doc([String? id]);
+  StopDocumentReference doc([String? id]);
 
   /// Add a new document to this collection with the specified data,
   /// assigning it a document ID automatically.
-  Future<UserDataDocumentReference> add(UserData value);
+  Future<StopDocumentReference> add(Stop value);
 }
 
-class _$UserDataCollectionReference extends _$UserDataQuery
-    implements UserDataCollectionReference {
-  factory _$UserDataCollectionReference([FirebaseFirestore? firestore]) {
+class _$StopCollectionReference extends _$StopQuery
+    implements StopCollectionReference {
+  factory _$StopCollectionReference([FirebaseFirestore? firestore]) {
     firestore ??= FirebaseFirestore.instance;
 
-    return _$UserDataCollectionReference._(
-      firestore.collection('users').withConverter(
-            fromFirestore: UserDataCollectionReference.fromFirestore,
-            toFirestore: UserDataCollectionReference.toFirestore,
+    return _$StopCollectionReference._(
+      firestore.collection('stops').withConverter(
+            fromFirestore: StopCollectionReference.fromFirestore,
+            toFirestore: StopCollectionReference.toFirestore,
           ),
     );
   }
 
-  _$UserDataCollectionReference._(
-    CollectionReference<UserData> reference,
+  _$StopCollectionReference._(
+    CollectionReference<Stop> reference,
   ) : super(reference, $referenceWithoutCursor: reference);
 
   String get path => reference.path;
 
   @override
-  CollectionReference<UserData> get reference =>
-      super.reference as CollectionReference<UserData>;
+  CollectionReference<Stop> get reference =>
+      super.reference as CollectionReference<Stop>;
 
   @override
-  UserDataDocumentReference doc([String? id]) {
+  StopDocumentReference doc([String? id]) {
     assert(
       id == null || id.split('/').length == 1,
       'The document ID cannot be from a different collection',
     );
-    return UserDataDocumentReference(
+    return StopDocumentReference(
       reference.doc(id),
     );
   }
 
   @override
-  Future<UserDataDocumentReference> add(UserData value) {
-    return reference.add(value).then((ref) => UserDataDocumentReference(ref));
+  Future<StopDocumentReference> add(Stop value) {
+    return reference.add(value).then((ref) => StopDocumentReference(ref));
   }
 
   @override
   bool operator ==(Object other) {
-    return other is _$UserDataCollectionReference &&
+    return other is _$StopCollectionReference &&
         other.runtimeType == runtimeType &&
         other.reference == reference;
   }
@@ -101,23 +101,23 @@ class _$UserDataCollectionReference extends _$UserDataQuery
   int get hashCode => Object.hash(runtimeType, reference);
 }
 
-abstract class UserDataDocumentReference
-    extends FirestoreDocumentReference<UserData, UserDataDocumentSnapshot> {
-  factory UserDataDocumentReference(DocumentReference<UserData> reference) =
-      _$UserDataDocumentReference;
+abstract class StopDocumentReference
+    extends FirestoreDocumentReference<Stop, StopDocumentSnapshot> {
+  factory StopDocumentReference(DocumentReference<Stop> reference) =
+      _$StopDocumentReference;
 
-  DocumentReference<UserData> get reference;
+  DocumentReference<Stop> get reference;
 
-  /// A reference to the [UserDataCollectionReference] containing this document.
-  UserDataCollectionReference get parent {
-    return _$UserDataCollectionReference(reference.firestore);
+  /// A reference to the [StopCollectionReference] containing this document.
+  StopCollectionReference get parent {
+    return _$StopCollectionReference(reference.firestore);
   }
 
   @override
-  Stream<UserDataDocumentSnapshot> snapshots();
+  Stream<StopDocumentSnapshot> snapshots();
 
   @override
-  Future<UserDataDocumentSnapshot> get([GetOptions? options]);
+  Future<StopDocumentSnapshot> get([GetOptions? options]);
 
   @override
   Future<void> delete();
@@ -127,8 +127,10 @@ abstract class UserDataDocumentReference
   ///
   /// If no document exists yet, the update will fail.
   Future<void> update({
-    bool isAdmin,
-    FieldValue isAdminFieldValue,
+    String name,
+    FieldValue nameFieldValue,
+    GeoPoint? location,
+    FieldValue locationFieldValue,
   });
 
   /// Updates fields in the current document using the transaction API.
@@ -136,51 +138,62 @@ abstract class UserDataDocumentReference
   /// The update will fail if applied to a document that does not exist.
   void transactionUpdate(
     Transaction transaction, {
-    bool isAdmin,
-    FieldValue isAdminFieldValue,
+    String name,
+    FieldValue nameFieldValue,
+    GeoPoint? location,
+    FieldValue locationFieldValue,
   });
 }
 
-class _$UserDataDocumentReference
-    extends FirestoreDocumentReference<UserData, UserDataDocumentSnapshot>
-    implements UserDataDocumentReference {
-  _$UserDataDocumentReference(this.reference);
+class _$StopDocumentReference
+    extends FirestoreDocumentReference<Stop, StopDocumentSnapshot>
+    implements StopDocumentReference {
+  _$StopDocumentReference(this.reference);
 
   @override
-  final DocumentReference<UserData> reference;
+  final DocumentReference<Stop> reference;
 
-  /// A reference to the [UserDataCollectionReference] containing this document.
-  UserDataCollectionReference get parent {
-    return _$UserDataCollectionReference(reference.firestore);
+  /// A reference to the [StopCollectionReference] containing this document.
+  StopCollectionReference get parent {
+    return _$StopCollectionReference(reference.firestore);
   }
 
   @override
-  Stream<UserDataDocumentSnapshot> snapshots() {
-    return reference.snapshots().map(UserDataDocumentSnapshot._);
+  Stream<StopDocumentSnapshot> snapshots() {
+    return reference.snapshots().map(StopDocumentSnapshot._);
   }
 
   @override
-  Future<UserDataDocumentSnapshot> get([GetOptions? options]) {
-    return reference.get(options).then(UserDataDocumentSnapshot._);
+  Future<StopDocumentSnapshot> get([GetOptions? options]) {
+    return reference.get(options).then(StopDocumentSnapshot._);
   }
 
   @override
-  Future<UserDataDocumentSnapshot> transactionGet(Transaction transaction) {
-    return transaction.get(reference).then(UserDataDocumentSnapshot._);
+  Future<StopDocumentSnapshot> transactionGet(Transaction transaction) {
+    return transaction.get(reference).then(StopDocumentSnapshot._);
   }
 
   Future<void> update({
-    Object? isAdmin = _sentinel,
-    FieldValue? isAdminFieldValue,
+    Object? name = _sentinel,
+    FieldValue? nameFieldValue,
+    Object? location = _sentinel,
+    FieldValue? locationFieldValue,
   }) async {
     assert(
-      isAdmin == _sentinel || isAdminFieldValue == null,
-      "Cannot specify both isAdmin and isAdminFieldValue",
+      name == _sentinel || nameFieldValue == null,
+      "Cannot specify both name and nameFieldValue",
+    );
+    assert(
+      location == _sentinel || locationFieldValue == null,
+      "Cannot specify both location and locationFieldValue",
     );
     final json = {
-      if (isAdmin != _sentinel) _$UserDataFieldMap['isAdmin']!: isAdmin as bool,
-      if (isAdminFieldValue != null)
-        _$UserDataFieldMap['isAdmin']!: isAdminFieldValue,
+      if (name != _sentinel) _$StopFieldMap['name']!: name as String,
+      if (nameFieldValue != null) _$StopFieldMap['name']!: nameFieldValue,
+      if (location != _sentinel)
+        _$StopFieldMap['location']!: location as GeoPoint?,
+      if (locationFieldValue != null)
+        _$StopFieldMap['location']!: locationFieldValue,
     };
 
     return reference.update(json);
@@ -188,17 +201,26 @@ class _$UserDataDocumentReference
 
   void transactionUpdate(
     Transaction transaction, {
-    Object? isAdmin = _sentinel,
-    FieldValue? isAdminFieldValue,
+    Object? name = _sentinel,
+    FieldValue? nameFieldValue,
+    Object? location = _sentinel,
+    FieldValue? locationFieldValue,
   }) {
     assert(
-      isAdmin == _sentinel || isAdminFieldValue == null,
-      "Cannot specify both isAdmin and isAdminFieldValue",
+      name == _sentinel || nameFieldValue == null,
+      "Cannot specify both name and nameFieldValue",
+    );
+    assert(
+      location == _sentinel || locationFieldValue == null,
+      "Cannot specify both location and locationFieldValue",
     );
     final json = {
-      if (isAdmin != _sentinel) _$UserDataFieldMap['isAdmin']!: isAdmin as bool,
-      if (isAdminFieldValue != null)
-        _$UserDataFieldMap['isAdmin']!: isAdminFieldValue,
+      if (name != _sentinel) _$StopFieldMap['name']!: name as String,
+      if (nameFieldValue != null) _$StopFieldMap['name']!: nameFieldValue,
+      if (location != _sentinel)
+        _$StopFieldMap['location']!: location as GeoPoint?,
+      if (locationFieldValue != null)
+        _$StopFieldMap['location']!: locationFieldValue,
     };
 
     transaction.update(reference, json);
@@ -206,7 +228,7 @@ class _$UserDataDocumentReference
 
   @override
   bool operator ==(Object other) {
-    return other is UserDataDocumentReference &&
+    return other is StopDocumentReference &&
         other.runtimeType == runtimeType &&
         other.parent == parent &&
         other.id == id;
@@ -216,13 +238,12 @@ class _$UserDataDocumentReference
   int get hashCode => Object.hash(runtimeType, parent, id);
 }
 
-abstract class UserDataQuery
-    implements QueryReference<UserData, UserDataQuerySnapshot> {
+abstract class StopQuery implements QueryReference<Stop, StopQuerySnapshot> {
   @override
-  UserDataQuery limit(int limit);
+  StopQuery limit(int limit);
 
   @override
-  UserDataQuery limitToLast(int limit);
+  StopQuery limitToLast(int limit);
 
   /// Perform an order query based on a [FieldPath].
   ///
@@ -244,17 +265,17 @@ abstract class UserDataQuery
   /// ```dart
   /// collection.orderByTitle(startAt: 'title');
   /// ```
-  UserDataQuery orderByFieldPath(
+  StopQuery orderByFieldPath(
     FieldPath fieldPath, {
     bool descending = false,
     Object? startAt,
     Object? startAfter,
     Object? endAt,
     Object? endBefore,
-    UserDataDocumentSnapshot? startAtDocument,
-    UserDataDocumentSnapshot? endAtDocument,
-    UserDataDocumentSnapshot? endBeforeDocument,
-    UserDataDocumentSnapshot? startAfterDocument,
+    StopDocumentSnapshot? startAtDocument,
+    StopDocumentSnapshot? endAtDocument,
+    StopDocumentSnapshot? endBeforeDocument,
+    StopDocumentSnapshot? startAfterDocument,
   });
 
   /// Perform a where query based on a [FieldPath].
@@ -274,7 +295,7 @@ abstract class UserDataQuery
   /// ```dart
   /// collection.whereTitle(isEqualTo: 'title');
   /// ```
-  UserDataQuery whereFieldPath(
+  StopQuery whereFieldPath(
     FieldPath fieldPath, {
     Object? isEqualTo,
     Object? isNotEqualTo,
@@ -289,7 +310,7 @@ abstract class UserDataQuery
     bool? isNull,
   });
 
-  UserDataQuery whereDocumentId({
+  StopQuery whereDocumentId({
     String? isEqualTo,
     String? isNotEqualTo,
     String? isLessThan,
@@ -300,48 +321,71 @@ abstract class UserDataQuery
     List<String>? whereIn,
     List<String>? whereNotIn,
   });
-  UserDataQuery whereIsAdmin({
-    bool? isEqualTo,
-    bool? isNotEqualTo,
-    bool? isLessThan,
-    bool? isLessThanOrEqualTo,
-    bool? isGreaterThan,
-    bool? isGreaterThanOrEqualTo,
+  StopQuery whereName({
+    String? isEqualTo,
+    String? isNotEqualTo,
+    String? isLessThan,
+    String? isLessThanOrEqualTo,
+    String? isGreaterThan,
+    String? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<bool>? whereIn,
-    List<bool>? whereNotIn,
+    List<String>? whereIn,
+    List<String>? whereNotIn,
+  });
+  StopQuery whereLocation({
+    GeoPoint? isEqualTo,
+    GeoPoint? isNotEqualTo,
+    GeoPoint? isLessThan,
+    GeoPoint? isLessThanOrEqualTo,
+    GeoPoint? isGreaterThan,
+    GeoPoint? isGreaterThanOrEqualTo,
+    bool? isNull,
+    List<GeoPoint?>? whereIn,
+    List<GeoPoint?>? whereNotIn,
   });
 
-  UserDataQuery orderByDocumentId({
+  StopQuery orderByDocumentId({
     bool descending = false,
     String startAt,
     String startAfter,
     String endAt,
     String endBefore,
-    UserDataDocumentSnapshot? startAtDocument,
-    UserDataDocumentSnapshot? endAtDocument,
-    UserDataDocumentSnapshot? endBeforeDocument,
-    UserDataDocumentSnapshot? startAfterDocument,
+    StopDocumentSnapshot? startAtDocument,
+    StopDocumentSnapshot? endAtDocument,
+    StopDocumentSnapshot? endBeforeDocument,
+    StopDocumentSnapshot? startAfterDocument,
   });
 
-  UserDataQuery orderByIsAdmin({
+  StopQuery orderByName({
     bool descending = false,
-    bool startAt,
-    bool startAfter,
-    bool endAt,
-    bool endBefore,
-    UserDataDocumentSnapshot? startAtDocument,
-    UserDataDocumentSnapshot? endAtDocument,
-    UserDataDocumentSnapshot? endBeforeDocument,
-    UserDataDocumentSnapshot? startAfterDocument,
+    String startAt,
+    String startAfter,
+    String endAt,
+    String endBefore,
+    StopDocumentSnapshot? startAtDocument,
+    StopDocumentSnapshot? endAtDocument,
+    StopDocumentSnapshot? endBeforeDocument,
+    StopDocumentSnapshot? startAfterDocument,
+  });
+
+  StopQuery orderByLocation({
+    bool descending = false,
+    GeoPoint? startAt,
+    GeoPoint? startAfter,
+    GeoPoint? endAt,
+    GeoPoint? endBefore,
+    StopDocumentSnapshot? startAtDocument,
+    StopDocumentSnapshot? endAtDocument,
+    StopDocumentSnapshot? endBeforeDocument,
+    StopDocumentSnapshot? startAfterDocument,
   });
 }
 
-class _$UserDataQuery extends QueryReference<UserData, UserDataQuerySnapshot>
-    implements UserDataQuery {
-  _$UserDataQuery(
+class _$StopQuery extends QueryReference<Stop, StopQuerySnapshot>
+    implements StopQuery {
+  _$StopQuery(
     this._collection, {
-    required Query<UserData> $referenceWithoutCursor,
+    required Query<Stop> $referenceWithoutCursor,
     $QueryCursor $queryCursor = const $QueryCursor(),
   }) : super(
           $referenceWithoutCursor: $referenceWithoutCursor,
@@ -351,20 +395,18 @@ class _$UserDataQuery extends QueryReference<UserData, UserDataQuerySnapshot>
   final CollectionReference<Object?> _collection;
 
   @override
-  Stream<UserDataQuerySnapshot> snapshots([SnapshotOptions? options]) {
-    return reference.snapshots().map(UserDataQuerySnapshot._fromQuerySnapshot);
+  Stream<StopQuerySnapshot> snapshots([SnapshotOptions? options]) {
+    return reference.snapshots().map(StopQuerySnapshot._fromQuerySnapshot);
   }
 
   @override
-  Future<UserDataQuerySnapshot> get([GetOptions? options]) {
-    return reference
-        .get(options)
-        .then(UserDataQuerySnapshot._fromQuerySnapshot);
+  Future<StopQuerySnapshot> get([GetOptions? options]) {
+    return reference.get(options).then(StopQuerySnapshot._fromQuerySnapshot);
   }
 
   @override
-  UserDataQuery limit(int limit) {
-    return _$UserDataQuery(
+  StopQuery limit(int limit) {
+    return _$StopQuery(
       _collection,
       $referenceWithoutCursor: $referenceWithoutCursor.limit(limit),
       $queryCursor: $queryCursor,
@@ -372,25 +414,25 @@ class _$UserDataQuery extends QueryReference<UserData, UserDataQuerySnapshot>
   }
 
   @override
-  UserDataQuery limitToLast(int limit) {
-    return _$UserDataQuery(
+  StopQuery limitToLast(int limit) {
+    return _$StopQuery(
       _collection,
       $referenceWithoutCursor: $referenceWithoutCursor.limitToLast(limit),
       $queryCursor: $queryCursor,
     );
   }
 
-  UserDataQuery orderByFieldPath(
+  StopQuery orderByFieldPath(
     FieldPath fieldPath, {
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
     Object? endAt = _sentinel,
     Object? endBefore = _sentinel,
-    UserDataDocumentSnapshot? startAtDocument,
-    UserDataDocumentSnapshot? endAtDocument,
-    UserDataDocumentSnapshot? endBeforeDocument,
-    UserDataDocumentSnapshot? startAfterDocument,
+    StopDocumentSnapshot? startAtDocument,
+    StopDocumentSnapshot? endAtDocument,
+    StopDocumentSnapshot? endBeforeDocument,
+    StopDocumentSnapshot? startAfterDocument,
   }) {
     final query =
         $referenceWithoutCursor.orderBy(fieldPath, descending: descending);
@@ -445,14 +487,14 @@ class _$UserDataQuery extends QueryReference<UserData, UserDataQuerySnapshot>
         endBeforeDocumentSnapshot: null,
       );
     }
-    return _$UserDataQuery(
+    return _$StopQuery(
       _collection,
       $referenceWithoutCursor: query,
       $queryCursor: queryCursor,
     );
   }
 
-  UserDataQuery whereFieldPath(
+  StopQuery whereFieldPath(
     FieldPath fieldPath, {
     Object? isEqualTo,
     Object? isNotEqualTo,
@@ -466,7 +508,7 @@ class _$UserDataQuery extends QueryReference<UserData, UserDataQuerySnapshot>
     List<Object?>? whereNotIn,
     bool? isNull,
   }) {
-    return _$UserDataQuery(
+    return _$StopQuery(
       _collection,
       $referenceWithoutCursor: $referenceWithoutCursor.where(
         fieldPath,
@@ -486,7 +528,7 @@ class _$UserDataQuery extends QueryReference<UserData, UserDataQuerySnapshot>
     );
   }
 
-  UserDataQuery whereDocumentId({
+  StopQuery whereDocumentId({
     String? isEqualTo,
     String? isNotEqualTo,
     String? isLessThan,
@@ -497,7 +539,7 @@ class _$UserDataQuery extends QueryReference<UserData, UserDataQuerySnapshot>
     List<String>? whereIn,
     List<String>? whereNotIn,
   }) {
-    return _$UserDataQuery(
+    return _$StopQuery(
       _collection,
       $referenceWithoutCursor: $referenceWithoutCursor.where(
         FieldPath.documentId,
@@ -515,21 +557,21 @@ class _$UserDataQuery extends QueryReference<UserData, UserDataQuerySnapshot>
     );
   }
 
-  UserDataQuery whereIsAdmin({
-    bool? isEqualTo,
-    bool? isNotEqualTo,
-    bool? isLessThan,
-    bool? isLessThanOrEqualTo,
-    bool? isGreaterThan,
-    bool? isGreaterThanOrEqualTo,
+  StopQuery whereName({
+    String? isEqualTo,
+    String? isNotEqualTo,
+    String? isLessThan,
+    String? isLessThanOrEqualTo,
+    String? isGreaterThan,
+    String? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<bool>? whereIn,
-    List<bool>? whereNotIn,
+    List<String>? whereIn,
+    List<String>? whereNotIn,
   }) {
-    return _$UserDataQuery(
+    return _$StopQuery(
       _collection,
       $referenceWithoutCursor: $referenceWithoutCursor.where(
-        _$UserDataFieldMap['isAdmin']!,
+        _$StopFieldMap['name']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -544,16 +586,45 @@ class _$UserDataQuery extends QueryReference<UserData, UserDataQuerySnapshot>
     );
   }
 
-  UserDataQuery orderByDocumentId({
+  StopQuery whereLocation({
+    GeoPoint? isEqualTo,
+    GeoPoint? isNotEqualTo,
+    GeoPoint? isLessThan,
+    GeoPoint? isLessThanOrEqualTo,
+    GeoPoint? isGreaterThan,
+    GeoPoint? isGreaterThanOrEqualTo,
+    bool? isNull,
+    List<GeoPoint?>? whereIn,
+    List<GeoPoint?>? whereNotIn,
+  }) {
+    return _$StopQuery(
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
+        _$StopFieldMap['location']!,
+        isEqualTo: isEqualTo,
+        isNotEqualTo: isNotEqualTo,
+        isLessThan: isLessThan,
+        isLessThanOrEqualTo: isLessThanOrEqualTo,
+        isGreaterThan: isGreaterThan,
+        isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
+        isNull: isNull,
+        whereIn: whereIn,
+        whereNotIn: whereNotIn,
+      ),
+      $queryCursor: $queryCursor,
+    );
+  }
+
+  StopQuery orderByDocumentId({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
     Object? endAt = _sentinel,
     Object? endBefore = _sentinel,
-    UserDataDocumentSnapshot? startAtDocument,
-    UserDataDocumentSnapshot? endAtDocument,
-    UserDataDocumentSnapshot? endBeforeDocument,
-    UserDataDocumentSnapshot? startAfterDocument,
+    StopDocumentSnapshot? startAtDocument,
+    StopDocumentSnapshot? endAtDocument,
+    StopDocumentSnapshot? endBeforeDocument,
+    StopDocumentSnapshot? startAfterDocument,
   }) {
     final query = $referenceWithoutCursor.orderBy(FieldPath.documentId,
         descending: descending);
@@ -609,26 +680,26 @@ class _$UserDataQuery extends QueryReference<UserData, UserDataQuerySnapshot>
       );
     }
 
-    return _$UserDataQuery(
+    return _$StopQuery(
       _collection,
       $referenceWithoutCursor: query,
       $queryCursor: queryCursor,
     );
   }
 
-  UserDataQuery orderByIsAdmin({
+  StopQuery orderByName({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
     Object? endAt = _sentinel,
     Object? endBefore = _sentinel,
-    UserDataDocumentSnapshot? startAtDocument,
-    UserDataDocumentSnapshot? endAtDocument,
-    UserDataDocumentSnapshot? endBeforeDocument,
-    UserDataDocumentSnapshot? startAfterDocument,
+    StopDocumentSnapshot? startAtDocument,
+    StopDocumentSnapshot? endAtDocument,
+    StopDocumentSnapshot? endBeforeDocument,
+    StopDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor
-        .orderBy(_$UserDataFieldMap['isAdmin']!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(_$StopFieldMap['name']!,
+        descending: descending);
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -681,7 +752,79 @@ class _$UserDataQuery extends QueryReference<UserData, UserDataQuerySnapshot>
       );
     }
 
-    return _$UserDataQuery(
+    return _$StopQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
+  }
+
+  StopQuery orderByLocation({
+    bool descending = false,
+    Object? startAt = _sentinel,
+    Object? startAfter = _sentinel,
+    Object? endAt = _sentinel,
+    Object? endBefore = _sentinel,
+    StopDocumentSnapshot? startAtDocument,
+    StopDocumentSnapshot? endAtDocument,
+    StopDocumentSnapshot? endBeforeDocument,
+    StopDocumentSnapshot? startAfterDocument,
+  }) {
+    final query = $referenceWithoutCursor.orderBy(_$StopFieldMap['location']!,
+        descending: descending);
+    var queryCursor = $queryCursor;
+
+    if (startAtDocument != null) {
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
+    }
+    if (startAfterDocument != null) {
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
+    }
+    if (endAtDocument != null) {
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
+    }
+    if (endBeforeDocument != null) {
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
+    }
+
+    if (startAt != _sentinel) {
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
+    }
+    if (startAfter != _sentinel) {
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
+    }
+    if (endAt != _sentinel) {
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
+    }
+    if (endBefore != _sentinel) {
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
+    }
+
+    return _$StopQuery(
       _collection,
       $referenceWithoutCursor: query,
       $queryCursor: queryCursor,
@@ -690,7 +833,7 @@ class _$UserDataQuery extends QueryReference<UserData, UserDataQuerySnapshot>
 
   @override
   bool operator ==(Object other) {
-    return other is _$UserDataQuery &&
+    return other is _$StopQuery &&
         other.runtimeType == runtimeType &&
         other.reference == reference;
   }
@@ -699,56 +842,55 @@ class _$UserDataQuery extends QueryReference<UserData, UserDataQuerySnapshot>
   int get hashCode => Object.hash(runtimeType, reference);
 }
 
-class UserDataDocumentSnapshot extends FirestoreDocumentSnapshot<UserData> {
-  UserDataDocumentSnapshot._(this.snapshot) : data = snapshot.data();
+class StopDocumentSnapshot extends FirestoreDocumentSnapshot<Stop> {
+  StopDocumentSnapshot._(this.snapshot) : data = snapshot.data();
 
   @override
-  final DocumentSnapshot<UserData> snapshot;
+  final DocumentSnapshot<Stop> snapshot;
 
   @override
-  UserDataDocumentReference get reference {
-    return UserDataDocumentReference(
+  StopDocumentReference get reference {
+    return StopDocumentReference(
       snapshot.reference,
     );
   }
 
   @override
-  final UserData? data;
+  final Stop? data;
 }
 
-class UserDataQuerySnapshot
-    extends FirestoreQuerySnapshot<UserData, UserDataQueryDocumentSnapshot> {
-  UserDataQuerySnapshot._(
+class StopQuerySnapshot
+    extends FirestoreQuerySnapshot<Stop, StopQueryDocumentSnapshot> {
+  StopQuerySnapshot._(
     this.snapshot,
     this.docs,
     this.docChanges,
   );
 
-  factory UserDataQuerySnapshot._fromQuerySnapshot(
-    QuerySnapshot<UserData> snapshot,
+  factory StopQuerySnapshot._fromQuerySnapshot(
+    QuerySnapshot<Stop> snapshot,
   ) {
-    final docs = snapshot.docs.map(UserDataQueryDocumentSnapshot._).toList();
+    final docs = snapshot.docs.map(StopQueryDocumentSnapshot._).toList();
 
     final docChanges = snapshot.docChanges.map((change) {
       return _decodeDocumentChange(
         change,
-        UserDataDocumentSnapshot._,
+        StopDocumentSnapshot._,
       );
     }).toList();
 
-    return UserDataQuerySnapshot._(
+    return StopQuerySnapshot._(
       snapshot,
       docs,
       docChanges,
     );
   }
 
-  static FirestoreDocumentChange<UserDataDocumentSnapshot>
-      _decodeDocumentChange<T>(
+  static FirestoreDocumentChange<StopDocumentSnapshot> _decodeDocumentChange<T>(
     DocumentChange<T> docChange,
-    UserDataDocumentSnapshot Function(DocumentSnapshot<T> doc) decodeDoc,
+    StopDocumentSnapshot Function(DocumentSnapshot<T> doc) decodeDoc,
   ) {
-    return FirestoreDocumentChange<UserDataDocumentSnapshot>(
+    return FirestoreDocumentChange<StopDocumentSnapshot>(
       type: docChange.type,
       oldIndex: docChange.oldIndex,
       newIndex: docChange.newIndex,
@@ -756,29 +898,28 @@ class UserDataQuerySnapshot
     );
   }
 
-  final QuerySnapshot<UserData> snapshot;
+  final QuerySnapshot<Stop> snapshot;
 
   @override
-  final List<UserDataQueryDocumentSnapshot> docs;
+  final List<StopQueryDocumentSnapshot> docs;
 
   @override
-  final List<FirestoreDocumentChange<UserDataDocumentSnapshot>> docChanges;
+  final List<FirestoreDocumentChange<StopDocumentSnapshot>> docChanges;
 }
 
-class UserDataQueryDocumentSnapshot
-    extends FirestoreQueryDocumentSnapshot<UserData>
-    implements UserDataDocumentSnapshot {
-  UserDataQueryDocumentSnapshot._(this.snapshot) : data = snapshot.data();
+class StopQueryDocumentSnapshot extends FirestoreQueryDocumentSnapshot<Stop>
+    implements StopDocumentSnapshot {
+  StopQueryDocumentSnapshot._(this.snapshot) : data = snapshot.data();
 
   @override
-  final QueryDocumentSnapshot<UserData> snapshot;
+  final QueryDocumentSnapshot<Stop> snapshot;
 
   @override
-  final UserData data;
+  final Stop data;
 
   @override
-  UserDataDocumentReference get reference {
-    return UserDataDocumentReference(snapshot.reference);
+  StopDocumentReference get reference {
+    return StopDocumentReference(snapshot.reference);
   }
 }
 
@@ -786,14 +927,31 @@ class UserDataQueryDocumentSnapshot
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
-      isAdmin: json['isAdmin'] as bool? ?? false,
+Stop _$StopFromJson(Map<String, dynamic> json) => Stop(
+      name: json['name'] as String,
+      location: _$JsonConverterFromJson<GeoPoint, GeoPoint>(
+          json['location'], const FirestoreGeoPointConverter().fromJson),
     );
 
-const _$UserDataFieldMap = <String, String>{
-  'isAdmin': 'isAdmin',
+const _$StopFieldMap = <String, String>{
+  'name': 'name',
+  'location': 'location',
 };
 
-Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
-      'isAdmin': instance.isAdmin,
+Map<String, dynamic> _$StopToJson(Stop instance) => <String, dynamic>{
+      'name': instance.name,
+      'location': _$JsonConverterToJson<GeoPoint, GeoPoint>(
+          instance.location, const FirestoreGeoPointConverter().toJson),
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) =>
+    value == null ? null : toJson(value);

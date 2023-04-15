@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_flutter_android/google_maps_flutter_android.dart';
+import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart';
 import 'package:location/location.dart';
 import 'package:on_in_bus/firebase_options.dart';
 import 'package:on_in_bus/routes.dart';
@@ -12,8 +12,10 @@ final _auth = FirebaseAuth.instance;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  if (defaultTargetPlatform == TargetPlatform.android) {
-    AndroidGoogleMapsFlutter.useAndroidViewSurface = true;
+  final GoogleMapsFlutterPlatform mapsImplementation =
+      GoogleMapsFlutterPlatform.instance;
+  if (mapsImplementation is GoogleMapsFlutterAndroid) {
+    mapsImplementation.useAndroidViewSurface = true;
   }
 
   await Firebase.initializeApp(

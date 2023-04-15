@@ -7,7 +7,7 @@ part of 'bus.dart';
 // **************************************************************************
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, require_trailing_commas, prefer_single_quotes, prefer_double_quotes, use_super_parameters
 
 class _Sentinel {
   const _Sentinel();
@@ -64,7 +64,7 @@ class _$BusCollectionReference extends _$BusQuery
 
   _$BusCollectionReference._(
     CollectionReference<Bus> reference,
-  ) : super(reference, reference);
+  ) : super(reference, $referenceWithoutCursor: reference);
 
   String get path => reference.path;
 
@@ -120,15 +120,39 @@ abstract class BusDocumentReference
   @override
   Future<void> delete();
 
+  /// Updates data on the document. Data will be merged with any existing
+  /// document data.
+  ///
+  /// If no document exists yet, the update will fail.
   Future<void> update({
     String name,
+    FieldValue nameFieldValue,
     double price,
+    FieldValue priceFieldValue,
     int seats,
+    FieldValue seatsFieldValue,
     GeoPoint? location,
+    FieldValue locationFieldValue,
     String color,
+    FieldValue colorFieldValue,
   });
 
-  Future<void> set(Bus value);
+  /// Updates fields in the current document using the transaction API.
+  ///
+  /// The update will fail if applied to a document that does not exist.
+  void transactionUpdate(
+    Transaction transaction, {
+    String name,
+    FieldValue nameFieldValue,
+    double price,
+    FieldValue priceFieldValue,
+    int seats,
+    FieldValue seatsFieldValue,
+    GeoPoint? location,
+    FieldValue locationFieldValue,
+    String color,
+    FieldValue colorFieldValue,
+  });
 }
 
 class _$BusDocumentReference
@@ -146,49 +170,118 @@ class _$BusDocumentReference
 
   @override
   Stream<BusDocumentSnapshot> snapshots() {
-    return reference.snapshots().map((snapshot) {
-      return BusDocumentSnapshot._(
-        snapshot,
-        snapshot.data(),
-      );
-    });
+    return reference.snapshots().map(BusDocumentSnapshot._);
   }
 
   @override
   Future<BusDocumentSnapshot> get([GetOptions? options]) {
-    return reference.get(options).then((snapshot) {
-      return BusDocumentSnapshot._(
-        snapshot,
-        snapshot.data(),
-      );
-    });
+    return reference.get(options).then(BusDocumentSnapshot._);
   }
 
   @override
-  Future<void> delete() {
-    return reference.delete();
+  Future<BusDocumentSnapshot> transactionGet(Transaction transaction) {
+    return transaction.get(reference).then(BusDocumentSnapshot._);
   }
 
   Future<void> update({
     Object? name = _sentinel,
+    FieldValue? nameFieldValue,
     Object? price = _sentinel,
+    FieldValue? priceFieldValue,
     Object? seats = _sentinel,
+    FieldValue? seatsFieldValue,
     Object? location = _sentinel,
+    FieldValue? locationFieldValue,
     Object? color = _sentinel,
+    FieldValue? colorFieldValue,
   }) async {
+    assert(
+      name == _sentinel || nameFieldValue == null,
+      "Cannot specify both name and nameFieldValue",
+    );
+    assert(
+      price == _sentinel || priceFieldValue == null,
+      "Cannot specify both price and priceFieldValue",
+    );
+    assert(
+      seats == _sentinel || seatsFieldValue == null,
+      "Cannot specify both seats and seatsFieldValue",
+    );
+    assert(
+      location == _sentinel || locationFieldValue == null,
+      "Cannot specify both location and locationFieldValue",
+    );
+    assert(
+      color == _sentinel || colorFieldValue == null,
+      "Cannot specify both color and colorFieldValue",
+    );
     final json = {
-      if (name != _sentinel) "name": name as String,
-      if (price != _sentinel) "price": price as double,
-      if (seats != _sentinel) "seats": seats as int,
-      if (location != _sentinel) "location": location as GeoPoint?,
-      if (color != _sentinel) "color": color as String,
+      if (name != _sentinel) _$BusFieldMap['name']!: name as String,
+      if (nameFieldValue != null) _$BusFieldMap['name']!: nameFieldValue,
+      if (price != _sentinel) _$BusFieldMap['price']!: price as double,
+      if (priceFieldValue != null) _$BusFieldMap['price']!: priceFieldValue,
+      if (seats != _sentinel) _$BusFieldMap['seats']!: seats as int,
+      if (seatsFieldValue != null) _$BusFieldMap['seats']!: seatsFieldValue,
+      if (location != _sentinel)
+        _$BusFieldMap['location']!: location as GeoPoint?,
+      if (locationFieldValue != null)
+        _$BusFieldMap['location']!: locationFieldValue,
+      if (color != _sentinel) _$BusFieldMap['color']!: color as String,
+      if (colorFieldValue != null) _$BusFieldMap['color']!: colorFieldValue,
     };
 
     return reference.update(json);
   }
 
-  Future<void> set(Bus value) {
-    return reference.set(value);
+  void transactionUpdate(
+    Transaction transaction, {
+    Object? name = _sentinel,
+    FieldValue? nameFieldValue,
+    Object? price = _sentinel,
+    FieldValue? priceFieldValue,
+    Object? seats = _sentinel,
+    FieldValue? seatsFieldValue,
+    Object? location = _sentinel,
+    FieldValue? locationFieldValue,
+    Object? color = _sentinel,
+    FieldValue? colorFieldValue,
+  }) {
+    assert(
+      name == _sentinel || nameFieldValue == null,
+      "Cannot specify both name and nameFieldValue",
+    );
+    assert(
+      price == _sentinel || priceFieldValue == null,
+      "Cannot specify both price and priceFieldValue",
+    );
+    assert(
+      seats == _sentinel || seatsFieldValue == null,
+      "Cannot specify both seats and seatsFieldValue",
+    );
+    assert(
+      location == _sentinel || locationFieldValue == null,
+      "Cannot specify both location and locationFieldValue",
+    );
+    assert(
+      color == _sentinel || colorFieldValue == null,
+      "Cannot specify both color and colorFieldValue",
+    );
+    final json = {
+      if (name != _sentinel) _$BusFieldMap['name']!: name as String,
+      if (nameFieldValue != null) _$BusFieldMap['name']!: nameFieldValue,
+      if (price != _sentinel) _$BusFieldMap['price']!: price as double,
+      if (priceFieldValue != null) _$BusFieldMap['price']!: priceFieldValue,
+      if (seats != _sentinel) _$BusFieldMap['seats']!: seats as int,
+      if (seatsFieldValue != null) _$BusFieldMap['seats']!: seatsFieldValue,
+      if (location != _sentinel)
+        _$BusFieldMap['location']!: location as GeoPoint?,
+      if (locationFieldValue != null)
+        _$BusFieldMap['location']!: locationFieldValue,
+      if (color != _sentinel) _$BusFieldMap['color']!: color as String,
+      if (colorFieldValue != null) _$BusFieldMap['color']!: colorFieldValue,
+    };
+
+    transaction.update(reference, json);
   }
 
   @override
@@ -201,26 +294,6 @@ class _$BusDocumentReference
 
   @override
   int get hashCode => Object.hash(runtimeType, parent, id);
-}
-
-class BusDocumentSnapshot extends FirestoreDocumentSnapshot<Bus> {
-  BusDocumentSnapshot._(
-    this.snapshot,
-    this.data,
-  );
-
-  @override
-  final DocumentSnapshot<Bus> snapshot;
-
-  @override
-  BusDocumentReference get reference {
-    return BusDocumentReference(
-      snapshot.reference,
-    );
-  }
-
-  @override
-  final Bus? data;
 }
 
 abstract class BusQuery implements QueryReference<Bus, BusQuerySnapshot> {
@@ -438,61 +511,41 @@ abstract class BusQuery implements QueryReference<Bus, BusQuerySnapshot> {
 class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     implements BusQuery {
   _$BusQuery(
-    this.reference,
-    this._collection,
-  );
+    this._collection, {
+    required Query<Bus> $referenceWithoutCursor,
+    $QueryCursor $queryCursor = const $QueryCursor(),
+  }) : super(
+          $referenceWithoutCursor: $referenceWithoutCursor,
+          $queryCursor: $queryCursor,
+        );
 
   final CollectionReference<Object?> _collection;
 
   @override
-  final Query<Bus> reference;
-
-  BusQuerySnapshot _decodeSnapshot(
-    QuerySnapshot<Bus> snapshot,
-  ) {
-    final docs = snapshot.docs.map((e) {
-      return BusQueryDocumentSnapshot._(e, e.data());
-    }).toList();
-
-    final docChanges = snapshot.docChanges.map((change) {
-      return FirestoreDocumentChange<BusDocumentSnapshot>(
-        type: change.type,
-        oldIndex: change.oldIndex,
-        newIndex: change.newIndex,
-        doc: BusDocumentSnapshot._(change.doc, change.doc.data()),
-      );
-    }).toList();
-
-    return BusQuerySnapshot._(
-      snapshot,
-      docs,
-      docChanges,
-    );
-  }
-
-  @override
   Stream<BusQuerySnapshot> snapshots([SnapshotOptions? options]) {
-    return reference.snapshots().map(_decodeSnapshot);
+    return reference.snapshots().map(BusQuerySnapshot._fromQuerySnapshot);
   }
 
   @override
   Future<BusQuerySnapshot> get([GetOptions? options]) {
-    return reference.get(options).then(_decodeSnapshot);
+    return reference.get(options).then(BusQuerySnapshot._fromQuerySnapshot);
   }
 
   @override
   BusQuery limit(int limit) {
     return _$BusQuery(
-      reference.limit(limit),
       _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.limit(limit),
+      $queryCursor: $queryCursor,
     );
   }
 
   @override
   BusQuery limitToLast(int limit) {
     return _$BusQuery(
-      reference.limitToLast(limit),
       _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.limitToLast(limit),
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -508,35 +561,64 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     BusDocumentSnapshot? endBeforeDocument,
     BusDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(fieldPath, descending: descending);
+    final query =
+        $referenceWithoutCursor.orderBy(fieldPath, descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
-
-    return _$BusQuery(query, _collection);
+    return _$BusQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
   BusQuery whereFieldPath(
@@ -554,7 +636,8 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     bool? isNull,
   }) {
     return _$BusQuery(
-      reference.where(
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
         fieldPath,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
@@ -568,7 +651,7 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
         whereNotIn: whereNotIn,
         isNull: isNull,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -584,7 +667,8 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     List<String>? whereNotIn,
   }) {
     return _$BusQuery(
-      reference.where(
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
         FieldPath.documentId,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
@@ -596,7 +680,7 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
         whereIn: whereIn,
         whereNotIn: whereNotIn,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -612,8 +696,9 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     List<String>? whereNotIn,
   }) {
     return _$BusQuery(
-      reference.where(
-        _$BusFieldMap["name"]!,
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
+        _$BusFieldMap['name']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -624,7 +709,7 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
         whereIn: whereIn,
         whereNotIn: whereNotIn,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -640,8 +725,9 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     List<double>? whereNotIn,
   }) {
     return _$BusQuery(
-      reference.where(
-        _$BusFieldMap["price"]!,
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
+        _$BusFieldMap['price']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -652,7 +738,7 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
         whereIn: whereIn,
         whereNotIn: whereNotIn,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -668,8 +754,9 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     List<int>? whereNotIn,
   }) {
     return _$BusQuery(
-      reference.where(
-        _$BusFieldMap["seats"]!,
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
+        _$BusFieldMap['seats']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -680,7 +767,7 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
         whereIn: whereIn,
         whereNotIn: whereNotIn,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -696,8 +783,9 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     List<GeoPoint?>? whereNotIn,
   }) {
     return _$BusQuery(
-      reference.where(
-        _$BusFieldMap["location"]!,
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
+        _$BusFieldMap['location']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -708,7 +796,7 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
         whereIn: whereIn,
         whereNotIn: whereNotIn,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -724,8 +812,9 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     List<String>? whereNotIn,
   }) {
     return _$BusQuery(
-      reference.where(
-        _$BusFieldMap["color"]!,
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
+        _$BusFieldMap['color']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -736,7 +825,7 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
         whereIn: whereIn,
         whereNotIn: whereNotIn,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -751,35 +840,65 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     BusDocumentSnapshot? endBeforeDocument,
     BusDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(FieldPath.documentId, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(FieldPath.documentId,
+        descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
 
-    return _$BusQuery(query, _collection);
+    return _$BusQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
   BusQuery orderByName({
@@ -793,36 +912,65 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     BusDocumentSnapshot? endBeforeDocument,
     BusDocumentSnapshot? startAfterDocument,
   }) {
-    var query =
-        reference.orderBy(_$BusFieldMap["name"]!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(_$BusFieldMap['name']!,
+        descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
 
-    return _$BusQuery(query, _collection);
+    return _$BusQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
   BusQuery orderByPrice({
@@ -836,36 +984,65 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     BusDocumentSnapshot? endBeforeDocument,
     BusDocumentSnapshot? startAfterDocument,
   }) {
-    var query =
-        reference.orderBy(_$BusFieldMap["price"]!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(_$BusFieldMap['price']!,
+        descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
 
-    return _$BusQuery(query, _collection);
+    return _$BusQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
   BusQuery orderBySeats({
@@ -879,36 +1056,65 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     BusDocumentSnapshot? endBeforeDocument,
     BusDocumentSnapshot? startAfterDocument,
   }) {
-    var query =
-        reference.orderBy(_$BusFieldMap["seats"]!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(_$BusFieldMap['seats']!,
+        descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
 
-    return _$BusQuery(query, _collection);
+    return _$BusQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
   BusQuery orderByLocation({
@@ -922,36 +1128,65 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     BusDocumentSnapshot? endBeforeDocument,
     BusDocumentSnapshot? startAfterDocument,
   }) {
-    var query =
-        reference.orderBy(_$BusFieldMap["location"]!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(_$BusFieldMap['location']!,
+        descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
 
-    return _$BusQuery(query, _collection);
+    return _$BusQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
   BusQuery orderByColor({
@@ -965,36 +1200,65 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
     BusDocumentSnapshot? endBeforeDocument,
     BusDocumentSnapshot? startAfterDocument,
   }) {
-    var query =
-        reference.orderBy(_$BusFieldMap["color"]!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(_$BusFieldMap['color']!,
+        descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
 
-    return _$BusQuery(query, _collection);
+    return _$BusQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
   @override
@@ -1008,6 +1272,23 @@ class _$BusQuery extends QueryReference<Bus, BusQuerySnapshot>
   int get hashCode => Object.hash(runtimeType, reference);
 }
 
+class BusDocumentSnapshot extends FirestoreDocumentSnapshot<Bus> {
+  BusDocumentSnapshot._(this.snapshot) : data = snapshot.data();
+
+  @override
+  final DocumentSnapshot<Bus> snapshot;
+
+  @override
+  BusDocumentReference get reference {
+    return BusDocumentReference(
+      snapshot.reference,
+    );
+  }
+
+  @override
+  final Bus? data;
+}
+
 class BusQuerySnapshot
     extends FirestoreQuerySnapshot<Bus, BusQueryDocumentSnapshot> {
   BusQuerySnapshot._(
@@ -1015,6 +1296,37 @@ class BusQuerySnapshot
     this.docs,
     this.docChanges,
   );
+
+  factory BusQuerySnapshot._fromQuerySnapshot(
+    QuerySnapshot<Bus> snapshot,
+  ) {
+    final docs = snapshot.docs.map(BusQueryDocumentSnapshot._).toList();
+
+    final docChanges = snapshot.docChanges.map((change) {
+      return _decodeDocumentChange(
+        change,
+        BusDocumentSnapshot._,
+      );
+    }).toList();
+
+    return BusQuerySnapshot._(
+      snapshot,
+      docs,
+      docChanges,
+    );
+  }
+
+  static FirestoreDocumentChange<BusDocumentSnapshot> _decodeDocumentChange<T>(
+    DocumentChange<T> docChange,
+    BusDocumentSnapshot Function(DocumentSnapshot<T> doc) decodeDoc,
+  ) {
+    return FirestoreDocumentChange<BusDocumentSnapshot>(
+      type: docChange.type,
+      oldIndex: docChange.oldIndex,
+      newIndex: docChange.newIndex,
+      doc: decodeDoc(docChange.doc),
+    );
+  }
 
   final QuerySnapshot<Bus> snapshot;
 
@@ -1027,18 +1339,18 @@ class BusQuerySnapshot
 
 class BusQueryDocumentSnapshot extends FirestoreQueryDocumentSnapshot<Bus>
     implements BusDocumentSnapshot {
-  BusQueryDocumentSnapshot._(this.snapshot, this.data);
+  BusQueryDocumentSnapshot._(this.snapshot) : data = snapshot.data();
 
   @override
   final QueryDocumentSnapshot<Bus> snapshot;
 
   @override
+  final Bus data;
+
+  @override
   BusDocumentReference get reference {
     return BusDocumentReference(snapshot.reference);
   }
-
-  @override
-  final Bus data;
 }
 
 // **************************************************************************

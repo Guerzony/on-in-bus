@@ -23,7 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final username = '${userController.text}@buser.dev';
     final password = passwordController.text;
 
-    if (!Form.of(context)!.validate()) return;
+    if (!Form.of(context).validate()) return;
 
     try {
       setState(() => loading = true);
